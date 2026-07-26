@@ -1,0 +1,20 @@
+
+main > #root {
+    margin: 0px 250px;
+    border-left: 2px dashed gray;
+    border-right: 2px dashed gray;
+    padding: 0px 30px;
+}
+
+li {
+  border: 1px solid black;
+  margin-bottom: 5px;
+}
+
+
+html {
+    font-size: 20px;
+    font-family: Bitcount Grid Double;
+    background-color: black;
+    color: white;
+}
