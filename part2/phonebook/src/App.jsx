@@ -1,8 +1,10 @@
 import { useState, useEffect } from 'react'
-import axios from 'axios'
+
 import AddPhonebook from './component/AddPhonebook'
 import Numbers from './component/Numbers'
 import Filter from './component/Filter'
+
+import personsService from './services/persons'
 
 
 const App = () => {
@@ -11,11 +13,14 @@ const App = () => {
   const [newNumber, setNewNumber] = useState('')
   const [nameFilted, setNameFilted] = useState('')
   useEffect(() => {
-    axios.get('http://localhost:3001/persons').then((r) => setPersons(r.data))
+    personsService.getAll()
+    .then((data) => {
+      setPersons(data)
+    })
   }, [])
 
 
-  let personsToShow = persons.filter((p) => 
+  let personsToShow = persons.filter((p) =>
     p.name.toLowerCase().includes(nameFilted.toLowerCase())
   )
 
@@ -35,9 +40,14 @@ const App = () => {
         setNewName={setNewName}
         newNumber={newNumber}
         setNewNumber={setNewNumber}
+        personsService={personsService}
       />
       <h2>Numbers</h2>
-      <Numbers persons={personsToShow} />
+      <Numbers
+        persons={personsToShow}
+        setPersons={setPersons}
+        personsService={personsService}
+      />
     </div>
   )
 }
